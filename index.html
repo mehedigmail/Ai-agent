@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d18">
+  <title>Trade with Tahir AI Bot — Demo Terminal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="icon-button mobile-menu" id="menu-toggle" aria-label="Toggle navigation">☰</button>
+      <a class="brand" href="/" aria-label="Tahir AI home"><span class="brand-mark">T</span><span>TAHIR<span class="brand-muted"> / LAB</span></span></a>
+      <div class="market-tabs" id="asset-tabs" aria-label="Sample assets"></div>
+      <div class="top-actions"><span class="demo-pill"><i></i> DEMO ACCOUNT</span><span class="balance-chip"><span>VIRTUAL BALANCE</span><strong id="top-balance">—</strong></span><button class="avatar" aria-label="Demo profile">T</button></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-group"><span class="eyebrow">WORKSPACE</span>
+          <button class="nav-item active" data-view="dashboard"><span class="nav-icon">▦</span>Dashboard</button>
+          <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span>Settings</button>
+        </div>
+        <div class="sidebar-bottom"><span class="live-dot"></span><span>Local demo engine</span><small>v3.2</small></div>
+      </aside>
+
+      <main class="main-content">
+        <div class="page-heading"><div><div class="breadcrumb">WORKSPACE <span>/</span> <b id="breadcrumb-view">DASHBOARD</b></div><h1>Trading terminal</h1><p>Read the market. Simulate with virtual funds.</p></div><div class="session-tag"><span class="live-dot"></span> SAMPLE FEED <span class="divider">|</span> <span id="clock">--:--:-- UTC</span></div></div>
+
+        <div class="dashboard-grid" id="dashboard-view">
+          <section class="market-column">
+            <div class="chart-card">
+              <div class="chart-head"><div class="instrument"><div class="instrument-icon" id="instrument-icon">€</div><div><h2 id="instrument-name">EUR/USD</h2><span class="sample-label">SYNTHETIC SAMPLE DATA</span></div><span class="timeframe">30s</span></div><div class="chart-price"><strong id="chart-price">—</strong><span id="price-change" class="price-change">SIMULATED</span></div></div>
+              <div class="chart-wrap"><canvas id="market-chart" aria-label="Synthetic sample candlestick chart"></canvas><div class="chart-watermark">SAMPLE DATA · NOT LIVE</div><div class="chart-tooltip" id="chart-tooltip"></div></div>
+              <div class="chart-footer"><span><i class="legend-candle up"></i> Up</span><span><i class="legend-candle down"></i> Down</span><span class="data-source-note">Generated prices for interface testing only</span></div>
+            </div>
+
+            <section class="signal-card panel-card"><div class="section-title"><div><span class="eyebrow">AI MARKET READ</span><h2>Current signal</h2></div><span class="model-tag"><span class="sparkle">✳</span> QuantumEdge AI v3.2</span></div><div class="signal-content"><div class="signal-badge wait" id="signal-badge"><span class="signal-arrow">•</span><span id="signal-label">WAIT</span></div><p id="signal-reason">Loading market analysis…</p></div><div class="indicator-row"><div><span>FAST SMA</span><strong id="fast-sma">—</strong></div><div><span>SLOW SMA</span><strong id="slow-sma">—</strong></div><div><span>RSI</span><strong id="rsi-value">—</strong></div><div><span>ANALYZED SAMPLES</span><strong id="sample-count">—</strong></div></div></section>
+
+            <section class="history-card panel-card"><div class="section-title"><div><span class="eyebrow">VIRTUAL EXECUTION LOG</span><h2>Trade history</h2></div><span class="history-count" id="history-count">0 trades</span></div><div class="table-scroll"><table><thead><tr><th>ASSET / SIDE</th><th>ENTRY → EXIT</th><th>RESULT</th><th>VIRTUAL P/L</th></tr></thead><tbody id="history-body"><tr><td colspan="4" class="empty-row">No completed demo trades yet</td></tr></tbody></table></div></section>
+          </section>
+
+          <aside class="trade-column">
+            <section class="trade-panel panel-card"><div class="trade-panel-head"><div><span class="eyebrow">TRADE WITH</span><h2>Trade with Tahir<br>AI Bot</h2></div><span class="bot-orb">✳</span></div><div class="model-status"><span class="status-light"></span><div><strong>QuantumEdge AI v3.2</strong><small id="agent-status">STOPPED</small></div><span class="demo-mini">DEMO</span></div>
+            <section class="trade-panel panel-card"><div class="trade-panel-head"><div><span class="eyebrow">TRADE WITH</span><h2>Trade with Tahir<br>AI Bot</h2></div><span class="bot-orb">✳</span></div><div class="model-status"><span class="status-light"></span><div><strong>QuantumEdge AI v3.2</strong><small id="agent-status">STOPPED</small></div><span class="demo-mini">DEMO</span></div><div id="agent-error" class="agent-error hidden" role="alert"></div>
+              <div class="control-field"><label for="asset-select">SELECTED ASSET</label><select id="asset-select"></select></div>
+              <div class="two-fields"><div class="control-field"><label for="investment-input">INVESTMENT</label><div class="input-wrap"><span>$</span><input id="investment-input" type="number" min="1" step="1" value="100"></div></div><div class="control-field"><label for="duration-select">DURATION</label><select id="duration-select"><option value="5">5 sec</option><option value="15">15 sec</option><option value="30" selected>30 sec</option><option value="60">1 min</option><option value="120">2 min</option></select></div></div>
+              <div class="payout-line"><span>Potential payout <b class="info-dot" title="An estimate from the configured demo payout rate">i</b></span><strong id="payout-value">$82.00</strong></div>
+              <div class="countdown-card" id="countdown-card"><span class="countdown-icon">◷</span><div><small id="countdown-label">TRADE TIMER</small><strong id="countdown">READY</strong></div><span class="countdown-state" id="countdown-state">IDLE</span></div>
+              <button id="agent-button" class="start-button"><span>▶</span> Start Trading</button>
+              <div class="trade-divider"><span>OR PLACE A MANUAL DEMO TRADE</span></div>
+              <div class="direction-buttons"><button id="up-button" class="direction-button up-button"><span>↗</span><b>UP</b><small>Price rises</small></button><button id="down-button" class="direction-button down-button"><span>↘</span><b>DOWN</b><small>Price falls</small></button></div>
+              <p class="risk-note"><span>ⓘ</span> Virtual funds only. Signals are informational and never guarantee results.</p>
+            </section>
+            <section class="account-card panel-card"><div class="account-heading"><span class="eyebrow">ACCOUNT MODE</span><span class="demo-pill small-pill"><i></i> LIVE SIMULATION</span></div><div class="account-balance"><strong id="account-balance">—</strong><span>virtual USD</span></div><div class="account-bottom"><span>Starting balance</span><strong id="starting-balance">—</strong></div><div class="account-bottom"><span>Active position</span><strong id="position-status">None</strong></div></section>
+          </aside>
+        </div>
+
+        <section class="settings-view panel-card hidden" id="settings-view"><div class="section-title"><div><span class="eyebrow">CONFIGURATION</span><h2>Demo agent settings</h2><p>Settings apply only to the virtual-funds simulator.</p></div><span class="demo-pill"><i></i> DEMO ONLY</span></div><form id="settings-form"><div class="settings-grid"><label>Starting demo balance <div class="input-wrap"><span>$</span><input name="starting_balance" type="number" min="100" step="100" required></div><small>Changing this resets demo balance and history.</small></label><label>Default investment <div class="input-wrap"><span>$</span><input name="investment" type="number" min="1" step="1" required></div></label><label>Trade duration <select name="duration_seconds"><option value="5">5 seconds</option><option value="15">15 seconds</option><option value="30">30 seconds</option><option value="60">1 minute</option><option value="120">2 minutes</option></select></label><label>Sample data source <select name="data_source"><option value="SAMPLE">Generated sample candles</option></select></label><label>Fast SMA period <input name="sma_fast" type="number" min="2" max="50" required></label><label>Slow SMA period <input name="sma_slow" type="number" min="3" max="100" required></label><label>RSI period <input name="rsi_period" type="number" min="2" max="100" required></label><label>Maximum investment <div class="input-wrap"><span>$</span><input name="max_investment" type="number" min="1" step="1" required></div></label><label>Max consecutive demo trades <input name="max_consecutive_trades" type="number" min="1" max="100" required></label><label>Max cumulative demo loss <div class="input-wrap"><span>$</span><input name="max_demo_loss" type="number" min="1" step="100" required></div></label></div><div class="settings-actions"><button class="start-button" type="submit">Save settings</button><button class="secondary-button" id="reset-settings" type="button">Reset to defaults</button><span id="settings-message" role="status"></span></div></form></section>
+        <footer class="app-footer"><span>TAHIR / LAB <span class="footer-dot">·</span> DEMO SIMULATOR</span><span>Sample data only · No real-money execution</span></footer>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+</body>
+</html>
